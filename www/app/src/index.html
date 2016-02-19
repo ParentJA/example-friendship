@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html lang="en" ng-app="example">
+<head>
+  <meta charset="utf-8">
+  <title>example</title>
+</head>
+<body ng-controller="MainController">
+{% verbatim %}
+<!-- Sign up and log in -->
+<section ng-hide="hasUser()">
+  <h1>Sign up</h1>
+  <div sign-up></div>
+  <h1>Log in</h1>
+  <div log-in></div>
+</section>
+
+<!-- Log out -->
+<section ng-show="hasUser()">
+  <h1>Log out</h1>
+  <p>Logged in as {{ getUser().username }}</p>
+  <div log-out></div>
+</section>
+
+<!-- Friend lists -->
+<section ng-show="hasUser()">
+  <h1>Unknown</h1>
+  <ul>
+    <li friend="friend" ng-repeat="friend in getUnknown()"></li>
+  </ul>
+  <h1>Current</h1>
+  <ul>
+    <li friend="friend" data-status="A" ng-repeat="friend in getCurrent()"></li>
+  </ul>
+  <h1>Pending</h1>
+  <ul>
+    <li friend="friend" data-status="P" ng-repeat="friend in getPending()"></li>
+  </ul>
+</section>
+{% endverbatim %}
+<script src="{% static 'vendor-scripts.js' %}"></script>
+<script src="{% static 'app-scripts.js' %}"></script>
+</body>
+</html>
